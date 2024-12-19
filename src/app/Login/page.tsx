@@ -1,7 +1,7 @@
 // pages/login.tsx
 'use client'
 import { useState } from 'react';
-import NoNavbarLayout from '../components/NoNavbar';
+
 
 const LoginPage = () => {
   const [email, setEmail] = useState<string>('');

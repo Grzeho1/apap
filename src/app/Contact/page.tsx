@@ -1,7 +1,5 @@
-// app/about/page.tsx
-import Image from "next/image";
-
-import { Roboto } from "next/font/google";
+import Image from "next/image"
+import { Roboto } from "next/font/google"
 
 const roboto = Roboto({
     subsets: ['latin'], 
@@ -9,10 +7,10 @@ const roboto = Roboto({
     variable: '--font-roboto', 
   });
 
-export default function About(){
 
-    return (
-        <div className="flex flex-col min-h-screen"> {/* Použití flexbox pro celou stránku */}
+export default function Contact(){
+    return(
+<div className="flex flex-col min-h-screen"> {/* Použití flexbox pro celou stránku */}
         <main className="flex-grow grid grid-rows-[20px_1fr_20px] items-center justify-items-center p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
           <div className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
             <Image
@@ -27,6 +25,6 @@ export default function About(){
         </main>
         
       </div>
-
     )
+
 }
