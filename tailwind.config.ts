@@ -1,3 +1,4 @@
+import { Roboto } from "next/font/google";
 import type { Config } from "tailwindcss";
 
 export default {
@@ -11,6 +12,10 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        'moje': '#171717'
+      },
+      fontFamily:{
+        sans: ['Roboto', 'sans-serif'],
       },
     },
   },
