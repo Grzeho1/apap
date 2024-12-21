@@ -1,6 +1,9 @@
 // pages/login.tsx
 'use client'
 import { useState } from 'react';
+import { login } from '../Services/auth';
+import { redirect } from 'next/dist/server/api-utils';
+
 
 
 const LoginPage = () => {
@@ -8,29 +11,35 @@ const LoginPage = () => {
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string>('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Jednoduchá validace (email a heslo)
+    
     if (!email || !password) {
       setError('Prosím vyplňte všechny údaje');
       return;
     }
 
-    // Zde můžeš provést autentifikaci (např. pomocí API)
-    console.log('Přihlášení', { email, password });
-
-    // Resetovat formulář a chybu
-    setEmail('');
+try {
+  const data = await login(email,password);
+  localStorage.setItem('token',data.token);
+  setEmail('');
     setPassword('');
     setError('');
-  };
+    
+  
+} catch (err:any){
+  setError(err.message);
+}
+
+ };
 
   return (
     
     <div className="min-h-screen flex justify-center items-center ">
-      <div className="bg-moje p-8 rounded-lg shadow-lg w-full max-w-sm">
-        <h2 className="text-3xl  font-bold text-center mb-6 ">Přihlášení</h2>
+      <div className="bg-moje p-8 rounded-lg shadow-lg w-full max-w-sm ">
+       
+        <h2 className="text-3xl font-bold text-center mb-6">Přihlášení</h2>
 
         {error && <div className="text-red-500 text-center mb-4">{error}</div>}
 
