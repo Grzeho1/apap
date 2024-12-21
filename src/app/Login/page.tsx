@@ -2,14 +2,17 @@
 'use client'
 import { useState } from 'react';
 import { login } from '../Services/auth';
-import { redirect } from 'next/dist/server/api-utils';
+import { useRouter } from 'next/navigation';
 
 
 
-const LoginPage = () => {
+  const LoginPage = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string>('');
+  const [token, setToken] = useState<string | null>(null);
+  const router = useRouter();
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,12 +24,33 @@ const LoginPage = () => {
     }
 
 try {
-  const data = await login(email,password);
-  localStorage.setItem('token',data.token);
-  setEmail('');
-    setPassword('');
-    setError('');
-    
+  const response = await fetch ('/api/login',{
+    method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+
+      if(!response.ok)
+      {
+        throw new Error(data.message || "chyba");
+      }
+      else
+      {
+      setToken(data.token);
+     router.push('/')
+
+      
+
+
+      setEmail('');
+      setPassword('');
+      setError('');
+      }
+
+
   
 } catch (err:any){
   setError(err.message);
@@ -51,7 +75,7 @@ try {
             <input
               type="email"
               id="email"
-              className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
               placeholder="example@email.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -66,7 +90,7 @@ try {
             <input
               type="password"
               id="password"
-              className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
               placeholder="Vaše heslo"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
