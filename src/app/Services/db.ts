@@ -17,8 +17,4 @@ const promisePool = pool.promise();
 
 
 
-
-
-
-
 export default promisePool;

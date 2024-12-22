@@ -9,7 +9,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #151515;
     --foreground: #ededed;
   }
 }
@@ -22,7 +22,7 @@ body {
 }
 
 .footer {
-  background-color: #333;
+  background-color: #0b0b0b;
   color: #fff;
   text-align: center;
   padding: 1rem;

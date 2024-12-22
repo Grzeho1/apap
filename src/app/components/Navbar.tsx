@@ -3,53 +3,49 @@ import Link from 'next/link';
 
 const Navbar = () => {
   return (
-    <nav style={styles.nav}>
-        <div style={styles.container}>
-                    <ul style={styles.ul}>
-                            <li style={styles.li}>
-                            <Link href="/">Home</Link>
-                            </li>
-                            <li style={styles.li}>
-                            <Link href="/About">About</Link>
-                            </li>
-                            <li style={styles.li}>
-                            <Link href="/Contact">Contact</Link>
-                            </li>
-                    </ul>
-            <div style={styles.right}>
-                        <Link href="/Login" style={styles.ul}>
-                        Login
-                        </Link>
-            </div>
+    <nav className="bg-layout p-4">
+      <div className="container mx-auto flex justify-between items-center">
+        <ul className="flex space-x-6">
+          <li>
+            <Link
+              href="/"
+              className="text-white relative group"
+            >
+              Home
+              <span className="absolute left-0 bottom-0 w-0 h-1 bg-blue-500 group-hover:w-full transition-all duration-300"></span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/About"
+              className="text-white relative group"
+            >
+              About
+              <span className="absolute left-0 bottom-0 w-0 h-1 bg-blue-500 group-hover:w-full transition-all duration-300"></span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/Contact"
+              className="text-white relative group"
+            >
+              Contact
+              <span className="absolute left-0 bottom-0 w-0 h-1 bg-blue-500 group-hover:w-full transition-all duration-300"></span>
+            </Link>
+          </li>
+        </ul>
+        <div>
+          <Link
+            href="/Login"
+            className="text-white relative group"
+          >
+            Login
+            <span className="absolute left-0 bottom-0 w-0 h-1 bg-blue-500 group-hover:w-full transition-all duration-300"></span>
+          </Link>
         </div>
+      </div>
     </nav>
   );
-};
-
-const styles = {
-  nav: {
-    background: '#333',
-    color: '#fff',
-    padding: '1rem',
-  },
-  ul: {
-    display: 'flex',
-    listStyle: 'none',
-    margin: 0,
-    padding: 0,
-  },
-  li: {
-    marginRight: '1rem',
-  },
-  right:{
-    display:"flex",
-    alignItems:"center"
-  },
-  container: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center"
-  }
 };
 
 export default Navbar;

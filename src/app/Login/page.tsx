@@ -1,19 +1,31 @@
-// pages/login.tsx
-'use client'
-import { useState } from 'react';
-import { login } from '../Services/auth';
-import { useRouter } from 'next/navigation';
 
+'use client'
+import { useState,useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import AuthLoader from '../components/AuthLoader';
+import cookie from 'cookie'
 
 
   const LoginPage = () => {
+  const [id, setId] =useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string>('');
   const [token, setToken] = useState<string | null>(null);
+  const [isLoading,setIsloading] = useState(true);
   const router = useRouter();
 
 
+
+
+   // Uloží token 
+   const saveTokenToCookie = (token: any) => {
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1); // Nastaví expiraci na 1 hodinu
+    document.cookie = `token=${token}; expires=${expires.toUTCString()}; path=/; secure; samesite=strict`;
+  };
+
+  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -23,11 +35,12 @@ import { useRouter } from 'next/navigation';
       return;
     }
 
+
 try {
   const response = await fetch ('/api/login',{
     method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({id, email, password }),
       });
 
       const data = await response.json();
@@ -40,18 +53,14 @@ try {
       else
       {
       setToken(data.token);
+      saveTokenToCookie(data.token);
      router.push('/')
-
-      
-
 
       setEmail('');
       setPassword('');
       setError('');
       }
 
-
-  
 } catch (err:any){
   setError(err.message);
 }
@@ -59,7 +68,7 @@ try {
  };
 
   return (
-    
+    <AuthLoader>
     <div className="min-h-screen flex justify-center items-center ">
       <div className="bg-moje p-8 rounded-lg shadow-lg w-full max-w-sm ">
        
@@ -108,7 +117,7 @@ try {
       </div>
     </div>
    
-    
+    </AuthLoader>
   );
 };
 

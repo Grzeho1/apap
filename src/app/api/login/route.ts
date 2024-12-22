@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
       user: {
         id: user.id,
         email: user.email,
-        name: user.name, // Pokud máš v tabulce sloupec 'username'
+        name: user.name, 
       }
     }, { status: 200 });
 

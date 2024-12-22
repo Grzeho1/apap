@@ -12,7 +12,8 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        'moje': '#171717'
+        'moje': '#2a2a2a',
+        'layout' : '#0b0b0b'
       },
       fontFamily:{
         sans: ['Roboto', 'sans-serif'],

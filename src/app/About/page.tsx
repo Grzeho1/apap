@@ -5,7 +5,7 @@ const CVPage = () => {
   return (
     <div style={{ fontFamily: 'Arial, sans-serif', lineHeight: '1.8', margin: '20px auto', maxWidth: '1200px', padding: '0 20px', display: 'grid', gridTemplateColumns: '1fr 3fr', gridGap: '20px', color: '#333' }}>
       {/* Top Section */}
-      <div style={{ gridColumn: '1 / -1', textAlign: 'center', marginBottom: '30px', background: '#232323', padding: '20px', borderRadius: '10px', boxShadow: '0 2px 5px rgba(0,0,0,0.1)' }}>
+      <div style={{ gridColumn: '1 / -1', textAlign: 'center', marginBottom: '30px', background: '#2a2a2a', padding: '20px', borderRadius: '10px', boxShadow: '0 2px 5px rgba(0,0,0,0.1)' }}>
         <img
           src="gorila.jpg"
           alt="Profile Photo"
