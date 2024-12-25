@@ -7,5 +7,5 @@ const Footers = () => {
     );
   };
   
-  export default Footers;  // Default export
+  export default Footers;  
   

@@ -1,20 +1,27 @@
 
 import db from "../Services/db";
+import { signIn, signOut, useSession } from 'next-auth/react';
+import { Job } from "../types/next-auth";
+import { FieldPacket,QueryResult  } from "mysql2";
 
 
-export async function GetUserByID(id:string) {
-    try {
-        const [rows] = await db.query('SELECT * FROM users WHERE id = ?', [id]);
-        
-        // Ověření, zda byl nalezen uživatel
-        if (!Array.isArray(rows) ||rows.length === 0) {
-          return null; 
-        }
+
+const { data: session } = useSession();
+
+export async function GetJobs(userEmail: string): Promise<Job[] | null> {
+  try {
     
-        return rows[0]; 
-      } catch (error) {
-        console.error('Database error:', error);
-        throw new Error('Unable to fetch user from the database');
-      }
+    const [rows]: [Job[], FieldPacket[]] = await db.query("SELECT * FROM userJob WHERE userID = ?", [userEmail]) as [Job[], FieldPacket[]];
+
+  
+    if (!Array.isArray(rows) || rows.length === 0) {
+      return null;
+    }
+
     
+    return rows;
+  } catch (error) {
+    console.error("Database error:", error);
+    throw new Error("Unable to fetch user jobs from the database");
+  }
 }

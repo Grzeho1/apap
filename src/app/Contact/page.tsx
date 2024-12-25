@@ -1,10 +1,17 @@
-import Image from "next/image"
+"use client"
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 
 
-export default function Contact(){
+
+
+
+
+export default function Contact() {
+ 
     return(
-<div className="flex flex-col min-h-screen"> {/* Použití flexbox pro celou stránku */}
+<div className="flex flex-col min-h-screen"> 
         <main className="flex-grow grid grid-rows-[20px_1fr_20px] items-center justify-items-center p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
           <div className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
             <Image
@@ -16,6 +23,8 @@ export default function Contact(){
               priority
             />
           </div>
+
+        
         </main>
         
       </div>
